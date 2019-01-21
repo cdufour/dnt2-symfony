@@ -1,0 +1,7 @@
+** A installer **
+Un éditeur au choix
+XAMPP
+Composer
+
+**
+Ajouter C:\xampp\php dans vos variables d'environnement

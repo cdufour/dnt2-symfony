@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+    {# Affichage des étudiants #}
+    <ul>
+    {% for student in students %}
+      <li>{{ student }}</li>
+    {% endfor %}
+    </ul>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Année de naissance</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for trainee in trainees %}
+          <tr>
+            <td>{{ trainee.name }}</td>
+            <td>{{ trainee.birthyear }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% for teacher in teachers %}
+      <div>{{ teacher.name }}</div>
+    {% endfor %}
+
+  </body>
+</html>
