@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+<style>
+  .square {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border: black 1px solid
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+<h1>Couleurs</h1>
+
+<table>
+  {% for color in colors %}
+  <tr>
+    <td>
+      <div
+        class="square"
+        style="background-color:#{{color.hexa}}"></div>
+    </td>
+    <td>{{ color.hexa }}</td>
+    <td>{{ color.rgb }}</td>
+    <td>{{ color.en }}</td>
+    <td>{{ color.fr }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

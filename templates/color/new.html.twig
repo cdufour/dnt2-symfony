@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<p>{{ method }}</p>
+
+<form method="post">
+  <div>
+    <input type="text" name="hexa" placeholder="hexa">
+  </div>
+  <div>
+    <input type="text" name="en" placeholder="en">
+  </div>
+  <div>
+    <input type="text" name="fr" placeholder="fr">
+  </div>
+  <div>
+    <input type="submit" name="submit" value="Enregistrer">
+  </div>
+</form>
+{% endblock %}

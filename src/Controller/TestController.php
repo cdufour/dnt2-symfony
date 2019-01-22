@@ -25,9 +25,9 @@ class TestController extends AbstractController {
     $title = 'Aiuto mi sta uccidendo !';
     $students = ['Julien', 'Kevin', 'Rayane'];
     $trainees = [
-      ['name' => 'Julien', 'birthyear' => 1995, 'Senior' => true],
-      ['name' => 'Kevin', 'birthyear' => 1936, 'Senior' => false],
-      ['name' => 'Rayane', 'birthyear' => 2010, 'Senior' => false],
+      ['name' => 'Julien', 'birthyear' => 1995, 'senior' => true],
+      ['name' => 'Kevin', 'birthyear' => 1936, 'senior' => false],
+      ['name' => 'Rayane', 'birthyear' => 2010, 'senior' => false],
     ];
 
     $teachers = [

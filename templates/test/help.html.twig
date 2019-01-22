@@ -23,7 +23,14 @@
       <tbody>
         {% for trainee in trainees %}
           <tr>
-            <td>{{ trainee.name }}</td>
+            <td>
+            {{ trainee.name }}
+            {% if trainee.senior %}
+              (Senior)
+            {% else %}
+              (Junior)
+            {% endif %}
+            </td>
             <td>{{ trainee.birthyear }}</td>
           </tr>
         {% endfor %}
