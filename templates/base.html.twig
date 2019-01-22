@@ -3,9 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <title>Application Demo</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{asset('css/styles.css')}}">
         {% block css %}{% endblock %}
     </head>
     <body>
+        {% include 'menu.html.twig' %}
+
         {% block body %}{% endblock %}
         {% block js %}{% endblock %}
     </body>

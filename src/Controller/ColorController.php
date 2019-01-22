@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Color;
+use App\Form\ColorType;
 
 class ColorController extends AbstractController
 {
@@ -19,9 +20,11 @@ class ColorController extends AbstractController
       // via le repository
       $repo = $this->getDoctrine()->getRepository(Color::class);
       $colors = $repo->findAll();
+      $colorsRaw = $repo->findAllRaw();
 
       return $this->render('color/index.html.twig', [
-        'colors' => $colors
+        'colors' => $colors,
+        'colorsRaw' => $colorsRaw
       ]);
     }
 
@@ -60,11 +63,79 @@ class ColorController extends AbstractController
     }
 
     /**
-     * @Route("/couleur/{name}", name="color_single")
+     * @Route("/color/single/{name}", name="color_single")
      */
     public function single($name)
     {
-      return new
+      $repo = $this->getDoctrine()->getRepository(Color::class);
+      $color = $repo->findOneByEn($name);
+      $hexa = $repo->findByColorname($name);
+
+      var_dump($hexa);
+
+      if (!$color) {
+        // couleur non trouvée en anglais
+        // Existe-t-elle en français ?
+        $color = $repo->findOneByFr($name);
+      }
+
+      if (!$color) return new Response('Couleur non trouvée');
+
+      // couleur trouvée
+      $html = '<div style="width:100px;height:100px;background-color:#'.$color->getHexa().'"></div>';
+      return new Response($html);
     }
+
+  /**
+   * @Route("/color/add", name="color_add")
+   */
+   public function add(Request $request)
+   {
+     $color = new Color(null, null, null);
+     $form = $this->createForm(ColorType::class, $color);
+
+     // traitement de la soumission du formulaire
+     $form->handleRequest($request);
+     if ($form->isSubmitted()) {
+       $color = $form->getData();
+       $em = $this->getDoctrine()->getManager();
+       $em->persist($color);
+       $em->flush();
+
+       return $this->redirectToRoute('color');
+     }
+
+     return $this->render('color/form.html.twig', [
+       'form' => $form->createView()
+     ]);
+   }
+
+
+   /**
+    * @Route("/color/edit/{id}", name="color_edit")
+    */
+    public function edit(Request $request, $id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $color = $em->getRepository(Color::class)->find($id);
+
+      $form = $this->createForm(ColorType::class, $color);
+
+      $form->handleRequest($request);
+      if ($form->isSubmitted()) {
+        $color = $form->getData();
+        $em->flush();
+        return $this->redirectToRoute('color');
+      }
+
+      return $this->render('color/form.html.twig', [
+        'form' => $form->createView()
+      ]);
+
+    }
+
+
+
+
 
 }

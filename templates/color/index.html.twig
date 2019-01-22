@@ -14,6 +14,8 @@
 {% block body %}
 <h1>Couleurs</h1>
 
+{# dump(colorsRaw) #}
+
 <table>
   {% for color in colors %}
   <tr>
@@ -23,9 +25,11 @@
         style="background-color:#{{color.hexa}}"></div>
     </td>
     <td>{{ color.hexa }}</td>
-    <td>{{ color.rgb }}</td>
     <td>{{ color.en }}</td>
     <td>{{ color.fr }}</td>
+    <td>
+      <a href="{{path('color_edit', {'id':color.id})}}">Modifier</a>
+    </td>
   </tr>
   {% endfor %}
 </table>

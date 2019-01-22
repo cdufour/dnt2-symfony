@@ -31,6 +31,7 @@ class ColorRepository extends ServiceEntityRepository
             ->orderBy('c.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
+            
             ->getResult()
         ;
     }
@@ -47,4 +48,29 @@ class ColorRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    // Approche non DQL mais SQL pur => on ne renvoie pas d'objets Color
+    public function findAllRaw()
+    {
+      $connection = $this->getEntityManager()->getConnection();
+      $sql = 'SELECT * FROM color';
+      $query = $connection->prepare($sql);
+      $query->execute();
+
+      return $query->fetchAll();
+    }
+
+    public function findByColorname($name)
+    {
+      $connection = $this->getEntityManager()->getConnection();
+      $sql =
+      'SELECT hexa
+        FROM color
+        WHERE color.en = :name
+        OR color.fr = :name
+      ';
+      $query = $connection->prepare($sql);
+      $query->execute([':name' => $name]);
+      return $query->fetch();
+    }
 }

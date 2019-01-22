@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<section>
+  <a
+    href="{{path('team_new')}}"
+    class="btn btn-primary">Ajouter une équipe</a>
+</section>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Année de création</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for team in teams %}
+    <tr>
+      <td>{{ team.name }}</td>
+      <td>{{ team.yearFoundation }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
