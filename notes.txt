@@ -15,3 +15,5 @@ php bin/console make:controller
 php bin/console make:entity
 php bin/console make:migration
 php bin/console make:form
+
+https://symfonycasts.com/screencast/question-answer-day/remove-form-field

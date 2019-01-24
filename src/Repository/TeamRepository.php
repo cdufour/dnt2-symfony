@@ -47,4 +47,13 @@ class TeamRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findNamesRaw()
+    {
+      $connection = $this->getEntityManager()->getConnection();
+      $sql = 'SELECT name FROM team';
+      $query = $connection->prepare($sql);
+      $query->execute();
+      return $query->fetchAll();
+    }
 }

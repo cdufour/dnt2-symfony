@@ -5,6 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Team;
 use App\Form\TeamType;
 
@@ -43,4 +45,21 @@ class TeamController extends AbstractController
           'form' => $form->createView(),
       ]);
     }
+
+    /**
+     * @Route("/team/json", name="team_json")
+     */
+     public function index_json()
+     {
+       $repo = $this
+        ->getDoctrine()
+        ->getRepository(Team::class);
+
+       $teams = $repo->findAll();
+
+       // return new Response(json_encode(['key' => 'value']));
+       // return new JsonResponse(['key' => 'value']);
+       // return new JsonResponse($teams);
+       return new JsonResponse($repo->findNamesRaw());
+     }
 }

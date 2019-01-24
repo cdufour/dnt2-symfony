@@ -12,3 +12,7 @@ a: hover {
   color: #222;
   font-weight: bold
 }
+
+img.player {
+  width: 50px
+}

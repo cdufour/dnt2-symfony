@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use App\Entity\Team;
 
 class PlayerType extends AbstractType
@@ -17,7 +18,7 @@ class PlayerType extends AbstractType
         $builder
             ->add('firstname')
             ->add('lastname')
-            ->add('photo')
+            ->add('photo', FileType::class)
             ->add('team', EntityType::class, [
               'class' => Team::class,
               'choice_label' => 'name'

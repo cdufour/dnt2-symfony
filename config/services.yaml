@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    player_photo_upload_dir: '%kernel.project_dir%/public/upload/player'
 
 services:
     # default configuration for services in *this* file
